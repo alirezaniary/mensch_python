@@ -2,8 +2,8 @@ class Board:
     def __init__(self):
         self._pos = [f'{x:02}' for x in range(40)]
         self._team_start_pos = {'A': 0, 'B': 10, 'C': 20, 'D': 30}
-        self._base_team = {team: [f'{team}b{x}' for x in range(4)] for team in 'ABCD'}
-        self._target_team = {team: [f'{team}t{x}' for x in range(4)] for team in 'ABCD'}
+        self._base_team = {team: [f'{team}_base_{x}' for x in range(4)] for team in 'ABCD'}
+        self._target_team = {team: [f'{team}_target_{x}' for x in range(4)] for team in 'ABCD'}
 
         self._positions = {}
         for t in 'ABCD':
@@ -24,6 +24,13 @@ class Board:
             return True
         else:
             return False
+
+    def is_all_base(self, team):
+        all_base = True
+        for p in self._base_team[team]:
+            if not self._positions[p]:
+                all_base = False
+        return all_base
 
 
 if __name__ == '__main__':
